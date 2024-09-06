@@ -1,14 +1,15 @@
 export const useUiState = defineStore('ui', () => {
   const isPanelDragging = ref(false)
+  const isContentDropdownShown = ref(false)
 
   const persistState = reactive(getLayoutDefaults())
 
   function getLayoutDefaults() {
     return {
-      panelDocs: 30,
+      panelDocs: 40,
       panelEditor: 60,
       panelPreview: 40,
-      panelFileTree: 20,
+      panelFileTree: 0,
       showTerminal: false,
     }
   }
@@ -19,10 +20,11 @@ export const useUiState = defineStore('ui', () => {
 
   const stateCookie = useCookie<Partial<typeof persistState>>(
     'nuxt-playground-ui-state',
-    { default: () => ({}), watch: true },
+    { default: () => (getLayoutDefaults()), watch: true },
   )
 
-  Object.assign(persistState, stateCookie.value)
+  // update and sync cookie with the reactive state
+  Object.assign(persistState, getLayoutDefaults(), { ...stateCookie.value })
   watch(persistState, () => {
     stateCookie.value = { ...persistState }
   })
@@ -43,6 +45,7 @@ export const useUiState = defineStore('ui', () => {
 
   return {
     isPanelDragging,
+    isContentDropdownShown,
     toggleTerminal,
     resetLayout,
     ...toRefs(persistState),

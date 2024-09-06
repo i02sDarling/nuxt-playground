@@ -6,7 +6,11 @@ const play = usePlaygroundStore()
 const ui = useUiState()
 const guide = useGuideStore()
 
-const files = computed(() => Array.from(play.files.values()).filter(file => !isFileIgnored(file.filepath)))
+const files = computed(() => Array
+  .from(play.files.values())
+  .filter(file => !isFileIgnored(file.filepath, guide.ignoredFiles)),
+)
+
 const directory = computed(() => filesToVirtualFsTree(files.value))
 
 const input = ref<string>('')
@@ -44,39 +48,59 @@ const panelInitEditor = computed(() => isMounted.value || {
 </script>
 
 <template>
-  <div
-    h-full
-    grid="~ rows-[min-content_1fr]"
+  <Splitpanes
+    of-hidden
+    :class="guide.features.fileTree === false ? 'disabled' : ''"
+    @resize="startDragging"
+    @resized="endDragging"
   >
-    <div
-      flex="~ gap-2 items-center"
-      border="b base dashed"
-      bg-faded px4 py2
+    <Pane
+      flex="~ col" h-full of-auto
+      :size="ui.panelFileTree"
+      :style="panelInitFileTree"
     >
-      <div i-ph-text-t-duotone />
-      <span text-sm>Editor</span>
-    </div>
-    <Splitpanes
-      of-hidden
-      @resize="startDragging"
-      @resized="endDragging"
+      <div
+        h-full
+        grid="~ rows-[min-content_1fr]"
+      >
+        <div
+          flex="~ gap-2 items-center"
+          border="b base dashed"
+          bg-faded px4 py2
+        >
+          <div i-ph-tree-structure-duotone />
+          <span text-sm>Files</span>
+        </div>
+        <div py2>
+          <PanelEditorFileSystemTree
+            v-model="play.fileSelected"
+            :directory="directory"
+            :depth="-1"
+          />
+        </div>
+      </div>
+    </Pane>
+    <PaneSplitter />
+    <Pane
+      :size="100 - ui.panelFileTree"
+      :style="panelInitEditor"
     >
-      <Pane
-        flex="~ col" h-full of-auto py1
-        :size="ui.panelFileTree"
-        :style="panelInitFileTree"
+      <div
+        h-full
+        grid="~ rows-[min-content_1fr]"
       >
-        <PanelEditorFileSystemTree
-          v-model="play.fileSelected"
-          :directory="directory"
-          :depth="-1"
-        />
-      </Pane>
-      <PaneSplitter />
-      <Pane
-        :size="100 - ui.panelFileTree"
-        :style="panelInitEditor"
-      >
+        <div
+          flex="~ gap-2 items-center"
+          border="b base dashed"
+          bg-faded px4 py2
+        >
+          <FileIcon :path="play.fileSelected?.filepath || ''" />
+          <span flex-auto text-sm>{{ play.fileSelected?.filepath || 'Editor' }}</span>
+          <ButtonShowSolution
+            my--1 mr--3 flex-none rounded px2 py1 text-sm op50
+            hover="bg-active op100"
+          />
+        </div>
         <LazyPanelEditorMonaco
           v-if="play.fileSelected"
           v-model="input"
@@ -84,7 +108,7 @@ const panelInitEditor = computed(() => isMounted.value || {
           h-full w-full
           @change="onTextInput"
         />
-      </Pane>
-    </Splitpanes>
-  </div>
+      </div>
+    </Pane>
+  </Splitpanes>
 </template>

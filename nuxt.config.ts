@@ -9,10 +9,46 @@ export default defineNuxtConfig({
     '@nuxtjs/color-mode',
     '@pinia/nuxt',
     'floating-vue/nuxt',
+    '@nuxtjs/seo',
+    'nuxt-icon',
+    '@nuxt/eslint',
+
+    // local
     '~/modules/template-loader',
+    '~/modules/nuxt-link',
   ],
   colorMode: {
     classSuffix: '',
+  },
+  site: {
+    url: 'https://learn-dev.nuxt.com',
+  },
+  eslint: {
+    config: {
+      standalone: false,
+    },
+  },
+  ogImage: {
+    defaults: {
+      component: 'OgImageDocs',
+      props: {
+        colorMode: 'dark',
+      },
+    },
+    componentOptions: {
+      global: true,
+    },
+  },
+  app: {
+    head: {
+      titleTemplate: '%s - Nuxt Tutorial',
+      htmlAttrs: {
+        lang: 'en-US',
+      },
+      link: [
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      ],
+    },
   },
   typescript: {
     includeWorkspace: true,
@@ -22,6 +58,27 @@ export default defineNuxtConfig({
       ],
     },
   },
+
+  features: {
+    inlineStyles: false,
+  },
+  runtimeConfig: {
+    public: {
+      buildTime: Date.now(),
+      gitSha: execaSync('git', ['rev-parse', 'HEAD']).stdout.trim(),
+    },
+    app: {
+      devtools: {
+        iframeProps: {
+          allow: 'cross-origin-isolated',
+          credentialless: true,
+        },
+      },
+    },
+  },
+  devtools: {
+    enabled: true,
+  },
   nitro: {
     routeRules: {
       '/**': {
@@ -30,15 +87,6 @@ export default defineNuxtConfig({
           'Cross-Origin-Opener-Policy': 'same-origin',
         },
       },
-    },
-  },
-  features: {
-    inlineStyles: false,
-  },
-  runtimeConfig: {
-    public: {
-      buildTime: Date.now(),
-      gitSha: execaSync('git', ['rev-parse', 'HEAD']).stdout.trim(),
     },
   },
   vite: {
@@ -63,9 +111,6 @@ export default defineNuxtConfig({
       ],
     },
   },
-  vue: {
-    defineModel: true,
-  },
   content: {
     documentDriven: true,
     highlight: {
@@ -79,13 +124,8 @@ export default defineNuxtConfig({
         'remark-external-links',
       ],
     },
-  },
-  app: {
-    head: {
-      titleTemplate: '%s - Nuxt Tutorial',
+    experimental: {
+      search: {},
     },
-  },
-  devtools: {
-    enabled: true,
   },
 })
