@@ -1,0 +1,13 @@
+{
+  "private": true,
+  "packageManager": "pnpm@8.14.0",
+  "scripts": {
+    "dev": "nuxt dev",
+    "prepare": "nuxt prepare"
+  },
+  "devDependencies": {
+    "nuxt": "latest",
+    "typescript": "latest",
+    "vue": "latest"
+  }
+}
