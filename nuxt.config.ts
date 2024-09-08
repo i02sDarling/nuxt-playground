@@ -66,7 +66,7 @@ export default defineNuxtConfig({
     public: {
       buildTime: Date.now(),
       gitSha: execaSync('git', ['rev-parse', 'HEAD']).stdout.trim(),
-      repoUrl: 'https://github.com/nuxt/learn.nuxt.com',
+      repoUrl: 'https://github.com/i02sDarling/nuxt-playground',
     },
     app: {
       devtools: {
