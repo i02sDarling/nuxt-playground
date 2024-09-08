@@ -6,16 +6,16 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@unocss/nuxt',
     '@nuxt/content',
+    '@nuxt/image',
     '@nuxtjs/color-mode',
     '@pinia/nuxt',
     'floating-vue/nuxt',
     '@nuxtjs/seo',
-    'nuxt-icon',
+    // '@nuxt/icon',
     '@nuxt/eslint',
 
     // local
     '~/modules/template-loader',
-    '~/modules/nuxt-link',
   ],
   colorMode: {
     classSuffix: '',
@@ -66,6 +66,7 @@ export default defineNuxtConfig({
     public: {
       buildTime: Date.now(),
       gitSha: execaSync('git', ['rev-parse', 'HEAD']).stdout.trim(),
+      repoUrl: 'https://github.com/nuxt/learn.nuxt.com',
     },
     app: {
       devtools: {
@@ -108,6 +109,7 @@ export default defineNuxtConfig({
         '@vue/language-service',
         '@volar/monaco/worker',
         'typescript',
+        'vscode-uri',
       ],
     },
   },
@@ -128,4 +130,6 @@ export default defineNuxtConfig({
       search: {},
     },
   },
+
+  compatibilityDate: '2024-04-03',
 })

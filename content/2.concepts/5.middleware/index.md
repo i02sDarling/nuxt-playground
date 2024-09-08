@@ -2,4 +2,4 @@
 ogImage: true
 ---
 
-# Auto Imports
+# Middleware

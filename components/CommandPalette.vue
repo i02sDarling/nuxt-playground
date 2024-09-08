@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { NuxtLink } from '#components'
 import type { Command } from '~/stores/commands'
 
 const commands = useCommandsStore()
@@ -107,7 +108,7 @@ useEventListener('keydown', (e) => {
 
       <div border="t base" flex="~ col" of-y-auto py2>
         <component
-          :is="c.to ? 'button' : 'button'"
+          :is="c.to ? NuxtLink : 'button'"
           v-for="c, idx in commands.commandsResult"
           :key="c.id || c.title"
           :ref="(el: Element) => selected === idx && scrollIntoView(el)"

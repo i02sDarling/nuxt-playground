@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import 'xterm/css/xterm.css'
-import type { ITheme } from 'xterm'
-import { Terminal } from 'xterm'
-import { FitAddon } from 'xterm-addon-fit'
+import '@xterm/xterm/css/xterm.css'
+import type { ITheme } from '@xterm/xterm'
+import { Terminal } from '@xterm/xterm'
+import { FitAddon } from '@xterm/addon-fit'
 import themeLight from 'theme-vitesse/extra/xterm-vitesse-light.json'
 import themeDark from 'theme-vitesse/extra/xterm-vitesse-dark.json'
 
@@ -65,8 +65,10 @@ watch(
       const reader = p.output.getReader()
       function read() {
         reader.read().then(({ done, value }) => {
-          if (value)
+          if (value) {
             terminal.write(value)
+            terminal.scrollToBottom()
+          }
           if (!done)
             read()
         })
@@ -78,6 +80,7 @@ watch(
         terminal.writeln('')
         terminal.writeln(`-------------`)
         terminal.writeln('')
+        terminal.scrollToBottom()
       }
 
       read()
