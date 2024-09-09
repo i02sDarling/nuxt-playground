@@ -1,5 +1,5 @@
 {
-  "name": "learn.nuxt.com",
+  "name": "nuxt.playground",
   "type": "module",
   "private": true,
   "packageManager": "pnpm@9.7.1",
