@@ -29,7 +29,6 @@ The tutorial content is located in the `content/` directory. Each route contains
 - `.template/files/**` - The files that will be copied to the playground when the user navigates to that guide, merged with the basic template under `template/basic/`
 - `.template/solutions/**` - Optional solutions for the tasks in that guide, merged with the guide files.
 
-
 ## License
 
 [MIT](./LICENSE)
