@@ -118,17 +118,32 @@ router.beforeEach(() => {
             />
           </div>
         </div>
-        <div border="t base dashed" mt-8 p3>
-          <NuxtLink
-            v-if="sourceUrl"
-            :to="sourceUrl" target="_blank"
-            flex="~ items-center gap-2"
-            text-inherit op75
-            hover="text-primary op100"
-          >
-            <div i-ph-note-pencil-duotone />
-            Edit this page
-          </NuxtLink>
+        <div flex="~ gap-4">
+          <div border="t base dashed" mt-8 p3>
+            <NuxtLink
+              v-if="sourceUrl"
+              :to="sourceUrl" target="_blank"
+              flex="~ items-center gap-2"
+              text-inherit op75
+              hover="text-primary op100"
+            >
+              <div i-ph-note-pencil-duotone />
+              Edit this page
+            </NuxtLink>
+          </div>
+
+          <div border="t base dashed" mt-8 p3>
+            <NuxtLink
+              to="https://beian.miit.gov.cn/"
+              target="_blank"
+              flex="~ items-center gap-2"
+              text-inherit op75
+              hover="text-primary op100"
+            >
+              <div ri:copyright-line />
+              豫ICP备2023002090号-1
+            </NuxtLink>
+          </div>
         </div>
       </article>
       <!-- Navigration Dropdown -->

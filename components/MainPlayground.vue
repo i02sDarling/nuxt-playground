@@ -146,6 +146,7 @@ const panelInitTerminal = computed(() => isMounted.value || {
       </Pane>
     </Splitpanes>
   </Transition>
+
 </template>
 
 <style>

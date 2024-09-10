@@ -39,4 +39,5 @@ onMounted(() => {
     <MainPlayground />
     <CommandPalette />
   </main>
+
 </template>
