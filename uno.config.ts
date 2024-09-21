@@ -16,7 +16,6 @@ export default defineConfig({
     'bg-faded': 'bg-gray:5',
     'bg-base': 'bg-white dark:bg-[#020420]',
     'text-faded': 'text-gray6:100 dark:text-gray3:80',
-
     'bg-code': 'bg-gray/5',
 
     'bg-inline-code': 'bg-gray-100 dark:bg-gray-800/75',
@@ -27,11 +26,13 @@ export default defineConfig({
     'z-splitter': 'z-102',
     'z-embedded-docs-close': 'z-103',
     'z-index-command-palette': 'z-200',
+
   },
   theme: {
     colors: {
       primary: {
         DEFAULT: '#00c16a',
+
       },
     },
   },

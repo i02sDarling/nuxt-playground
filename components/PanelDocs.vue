@@ -18,7 +18,7 @@ interface BreadcrumbItem {
   title: string
   path?: string
 }
-console.log(navigation.value)
+
 function findNavItemFromPath(path: string, items = navigation.value): NavItem | undefined {
   const item = items.find(i => i._path === path)
   if (item)
@@ -152,8 +152,8 @@ router.beforeEach(() => {
           v-if="ui.isContentDropdownShown"
           flex="~ col"
           border="b base"
-          absolute left-0 right-0 top-0 max-h-60vh py2
-          backdrop-blur-10 bg-base important-bg-opacity-80
+
+          absolute left-0 right-0 top-0 max-h-60vh of-auto py2 backdrop-blur-10 bg-base important-bg-opacity-80
         >
           <ContentNavItem v-for="item in navigation" :key="item.url" :item="item" />
         </div>
