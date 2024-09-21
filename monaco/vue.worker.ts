@@ -82,6 +82,7 @@ self.onmessage = () => {
         asFileName,
         () => '', // TODO getProjectVersion
         (fileName) => {
+          //@ts-expect-error missing types
           const uri = asUri(fileName)
           for (const model of ctx.getMirrorModels()) {
             if (model.uri.toString() === uri.toString()) {
@@ -90,6 +91,7 @@ self.onmessage = () => {
           }
           return false
         },
+        //@ts-expect-error missing types
         compilerOptions,
         vueCompilerOptions,
       )],
