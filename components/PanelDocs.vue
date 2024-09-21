@@ -155,7 +155,7 @@ router.beforeEach(() => {
 
           absolute left-0 right-0 top-0 max-h-60vh of-auto py2 backdrop-blur-10 bg-base important-bg-opacity-80
         >
-          <ContentNavItem v-for="item in navigation" :key="item.url" :item="item" :level="0"/>
+          <ContentNavItem v-for="item in navigation" :key="item.url" :item="item" :level="0" />
         </div>
       </Transition>
     </div>
