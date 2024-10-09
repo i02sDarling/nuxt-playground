@@ -10,7 +10,7 @@ defineProps<{
 <template>
   <div
     border="~ base rounded-lg
-     hover:primary" mx-0  of-hidden border-rd-md py-5 text-align-center bg-base
+     hover:primary" mx-0 of-hidden border-rd-md py-5 text-align-center bg-base
   >
     <span>
       <NuxtLink :to="to" hover="scale-130" transition="duration-300">

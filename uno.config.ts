@@ -1,3 +1,5 @@
+import extractorMdc from '@unocss/extractor-mdc'
+import { createLocalFontProcessor } from '@unocss/preset-web-fonts/local'
 import {
   defineConfig,
   presetAttributify,
@@ -7,8 +9,6 @@ import {
   presetWebFonts,
   transformerDirectives,
 } from 'unocss'
-import extractorMdc from '@unocss/extractor-mdc'
-import { createLocalFontProcessor } from '@unocss/preset-web-fonts/local'
 
 export default defineConfig({
   shortcuts: {
@@ -49,7 +49,7 @@ export default defineConfig({
           weights: [200, 400, 600, 700],
         },
         mono: 'DM Mono',
-        
+
       },
       processors: createLocalFontProcessor({
         cacheDir: 'node_modules/.cache/unocss/fonts',

@@ -6,6 +6,9 @@ export default antfu(
     unocss: true,
     formatters: true,
     markdown: false,
+    ignores: [
+      '**/content/*.md',
+    ],
   },
   nuxt,
 )
