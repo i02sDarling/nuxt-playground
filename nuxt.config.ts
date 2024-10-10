@@ -21,7 +21,7 @@ export default defineNuxtConfig({
     classSuffix: '',
   },
   site: {
-    url: 'https://learn-dev.nuxt.com',
+    url: 'https://i02sdarling.top',
   },
   eslint: {
     config: {
