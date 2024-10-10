@@ -49,6 +49,7 @@ export default defineNuxtConfig({
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       ],
     },
+
   },
   typescript: {
     includeWorkspace: true,
