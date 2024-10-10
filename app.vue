@@ -7,8 +7,8 @@ import './styles/overrides.css'
 
 useHead({
   meta: [
-    { name: 'description', content: '我的神奇网站。' },
-    { name: 'keywords', content: 'i02sdarling,02sdarling,darling,github,nuxt,2668933894@qq.com,袁哲,算法,博客' },
+    { name: 'description', content: 'Nuxt - Playground' },
+    { name: 'keywords', content: 'i02sdarling,02sdarling,darling,github,nuxt,2668933894@qq.com,袁哲,算法,博客,monaco,vscode,online-ide' },
   ],
 })
 </script>
