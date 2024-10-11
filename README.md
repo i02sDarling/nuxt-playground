@@ -1,7 +1,5 @@
 # Nuxt Tutorial Playground
 
-> [!WARNING]
-> This projct is forked from [learn-nuxt-com](https://github.com/nuxt/learn.nuxt.com) by antfu.
 
 ### Development
 

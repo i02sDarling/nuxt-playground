@@ -1,5 +1,6 @@
 // TODO install @types/splitpanes once updated
 declare module 'splitpanes' {
+  
   import type { Component } from 'vue'
 
   export interface SplitpaneProps {
