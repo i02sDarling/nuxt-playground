@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const msg = 'Hello World! This is the basic template.'
+const msg = 'Welcome to Nuxt Tutorial.'
 </script>
 
 <template>
