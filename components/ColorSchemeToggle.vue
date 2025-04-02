@@ -17,6 +17,14 @@ addCommands(
       : 'i-ph-sun-dim-duotone',
   },
 )
+addCommands(
+  {
+    id: 'ask_ai',
+    title: 'Ask AI for help',
+    handler: toggleMode,
+    icon: 'i-material-icon-theme-adobe-illustrator',
+  },
+)
 </script>
 
 <template>
