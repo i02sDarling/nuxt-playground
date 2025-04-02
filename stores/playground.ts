@@ -36,60 +36,27 @@ export const usePlaygroundStore = defineStore('playground', () => {
   // Mount the playground on client side
   if (import.meta.client) {
     async function init() {
-      const [
-        wc,
-        filesRaw,
+      const [ wc,filesRaw,
       ] = await Promise.all([
         import('@webcontainer/api')
           .then(({ WebContainer }) => WebContainer.boot()),
-
         import('../templates')
           .then(r => r.templates.basic({
-            nuxtrc: [
-              // Have color mode on initial load
-              colorMode.value === 'dark'
-                ? 'app.head.htmlAttrs.class=dark'
-                : '',
-            ],
-          })),
-      ])
-
-      filesTemplate = filesRaw
-      webcontainer.value = wc
-
-      Object.entries(filesRaw)
-        .forEach(([path, content]) => {
-          files.set(path, new VirtualFile(path, content, wc))
-        })
-
+            nuxtrc: [ colorMode.value === 'dark' ? 'app.head.htmlAttrs.class=dark' : '',
+            ], })),])
+      filesTemplate = filesRaw ;webcontainer.value = wc
+      Object.entries(filesRaw).forEach(([path, content]) => {  files.set(path, new VirtualFile(path, content, wc)) })
       wc.on('server-ready', async (port, url) => {
-        // Nuxt listen to multiple ports, and 'server-ready' is emitted for each of them
-        // We need the main one
         if (port === NUXT_PORT) {
-          preview.location = {
-            origin: url,
-            fullPath: '/',
-          }
-          status.value = 'polling'
+          preview.location = { origin: url, fullPath: '/',};status.value = 'polling';
         }
       })
 
-      wc.on('error', (err) => {
-        error.value = err
-        status.value = 'error'
-      })
-
+      wc.on('error', (err) => { error.value = err; status.value = 'error'})
       status.value = 'mount'
       await wc.mount(filesToWebContainerFs([...files.values()]))
-
       startServer()
-
-      // In dev, when doing HMR, we kill the previous process while reusing the same WebContainer
-      if (import.meta.hot) {
-        import.meta.hot.accept(() => {
-          killPreviousProcess()
-        })
-      }
+      if (import.meta.hot) { import.meta.hot.accept(() => { killPreviousProcess() }) }
     }
 
     _promiseInit = init()
