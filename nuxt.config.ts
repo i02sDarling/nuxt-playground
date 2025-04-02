@@ -1,4 +1,6 @@
 import { execaSync } from 'execa'
+import components from 'unplugin-vue-components/vite'
+import { AntDesignXVueResolver } from 'ant-design-x-vue/resolver'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -113,6 +115,11 @@ export default defineNuxtConfig({
         'vscode-uri',
       ],
     },
+    plugins: [
+      components({
+        resolvers: [AntDesignXVueResolver()],
+      }),
+    ],
   },
   content: {
     documentDriven: true,

@@ -1,11 +1,13 @@
 <script lang="ts" setup>
-import { ElMessageBox } from 'element-plus'
+import { ElDialog, ElMessageBox } from 'element-plus'
 
 const commands = useCommandsStore()
-const dialogVisible = ref(true)
+const talk = useTalkStore()
+const inputText = ref('')
+const scrollRef = ref<HTMLElement | null>(null)
 
 function handleClose(done: () => void) {
-  ElMessageBox.confirm('Are you sure to close this dialog?')
+  ElMessageBox.confirm('确认关闭吗？(您的输入将不会被保存)')
     .then(() => {
       commands.setDialogVisible(false)
       done()
@@ -13,6 +15,16 @@ function handleClose(done: () => void) {
     .catch(() => {
       // catch error
     })
+}
+setInterval(() => {
+  // @ts-ignore
+  scrollRef.value.scrollTop = scrollRef?.value?.scrollHeight
+}, 3000)
+async function sendMsg() {
+  talk.addTalkItem(inputText.value)
+  inputText.value = ''
+  await nextTick()
+  // 注意这里需要延迟20ms正好可以获取到更新后的dom节点
 }
 
 addCommands(
@@ -26,17 +38,23 @@ addCommands(
 </script>
 
 <template>
-  <el-dialog v-model="dialogVisible" title="Tips" width="500" z-100 :before-close="handleClose">
-    <span>This is a message</span>
+  <ElDialog v-model="commands.dialogVisible" title="DeepSeek-V1" width="500" z-100 :before-close="handleClose">
+    <div ref="scrollRef" h-40vh w-full overflow-y-auto>
+      <TalkItem />
+    </div>
     <template #footer>
       <div class="dialog-footer">
-        <el-button @click="dialogVisible = false">
-          Cancel
-        </el-button>
-        <el-button type="primary" @click="dialogVisible = false">
-          Confirm
+        <el-input
+          v-model="inputText"
+          autosize w-50vw text-1.5em font-600
+          type="textarea"
+          placeholder="输入您的内容"
+        />
+
+        <el-button type="primary" @click="sendMsg">
+          发送
         </el-button>
       </div>
     </template>
-  </el-dialog>
+  </ElDialog>
 </template>

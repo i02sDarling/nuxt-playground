@@ -4,7 +4,11 @@ import 'splitpanes/dist/splitpanes.css'
 import './styles/base.css'
 import './styles/prose.css'
 import './styles/overrides.css'
+import 'element-plus/dist/index.css'
+import ElementPlus from 'element-plus'
 
+const nuxtApp = useNuxtApp()
+nuxtApp.vueApp.use(ElementPlus)
 useHead({
   meta: [
     { name: 'description', content: 'Nuxt - Playground' },
