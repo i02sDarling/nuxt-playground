@@ -16,17 +16,19 @@ function handleClose(done: () => void) {
       // catch error
     })
 }
-setInterval(() => {
-  // @ts-ignore
-  scrollRef.value.scrollTop = scrollRef?.value?.scrollHeight
-}, 3000)
+
 async function sendMsg() {
   talk.addTalkItem(inputText.value)
   inputText.value = ''
   await nextTick()
   // 注意这里需要延迟20ms正好可以获取到更新后的dom节点
 }
-
+onMounted(() => {
+  setInterval(() => {
+  // @ts-ignore
+    scrollRef.value.scrollTop = scrollRef?.value?.scrollHeight
+  }, 3000)
+})
 addCommands(
   {
     id: 'ask_ai',
