@@ -15,13 +15,19 @@ export const useCommandsStore = defineStore('commands', () => {
   const isShown = ref(false)
   const commandsAll = reactive<Set<Command>>(new Set())
   const guidesResult = ref<Command[]>([])
+  const dialogVisible = ref(false)
 
   const fuse = computed(() => new Fuse(Array.from(commandsAll), {
     keys: ['title', 'description'],
     threshold: 0.3,
   }))
+  const setDialogVisible=(value: boolean)=>{
+    dialogVisible.value = value
+  }
+
 
   const debouncedSearch = refDebounced(search, 100)
+  
 
   watch(debouncedSearch, async (v) => {
     if (v) {
@@ -59,6 +65,8 @@ export const useCommandsStore = defineStore('commands', () => {
     isShown,
     commandsAll,
     commandsResult,
+    dialogVisible,
+    setDialogVisible
   }
 })
 

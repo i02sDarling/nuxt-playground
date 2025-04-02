@@ -23,6 +23,7 @@
     "@xterm/addon-fit": "^0.10.0",
     "@xterm/xterm": "^5.5.0",
     "birpc": "^0.2.19",
+    "element-plus": "^2.9.7",
     "floating-vue": "^5.2.2",
     "jszip": "^3.10.1",
     "monaco-editor": "^0.50.0",

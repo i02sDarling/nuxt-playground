@@ -38,5 +38,6 @@ onMounted(() => {
     <TheNav />
     <MainPlayground />
     <CommandPalette />
+    <AiInterface />
   </main>
 </template>

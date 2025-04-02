@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { requestAI } from '../composables/request'
+
 const ui = useUiState()
 const play = usePlaygroundStore()
 const guide = useGuideStore()
@@ -44,6 +45,7 @@ addCommands(
     icon: 'i-ph-terminal-window-duotone',
   },
 )
+
 </script>
 
 <template>
@@ -74,6 +76,14 @@ addCommands(
         @click="commands.isShown = true"
       >
         <div i-ph-magnifying-glass-duotone text-2xl />
+      </button>
+      <button
+        rounded p2
+        hover="bg-active"
+        title="Ask AI"
+        @click="commands.dialogVisible = true"
+      >
+        <div i-material-icon-theme-adobe-illustrator text-2xl />
       </button>
       <button
         v-if="play.status === 'ready' && !!guide.features.download"
@@ -124,4 +134,5 @@ addCommands(
       </NuxtLink>
     </div>
   </nav>
+
 </template>
