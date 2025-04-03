@@ -34,7 +34,7 @@ export const usePlaygroundStore = defineStore('playground', () => {
   let hasInstalled = false
 
   // Mount the playground on client side
-  if (false && import.meta.client) {
+  if (import.meta.client) {
     async function init() {
       const [wc, filesRaw,
       ] = await Promise.all([

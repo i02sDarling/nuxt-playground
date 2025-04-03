@@ -36,7 +36,7 @@ const barAvatar: CSSProperties = {
       placement="start"
       content="我是 DeepSeek，很高兴见到你！我可以帮你写代码、读文件、写作各种创意内容，请把你的任务交给我吧!"
       :avatar="{ icon: h(UserOutlined), style: fooAvatar }"
-      :typing="{ step: 2, interval: 50 }"
+      :typing="(talk.talkHistory.length === 0 ? ({ step: 2, interval: 50 }) : false)"
     />
     <div
       v-for="(item, id) in talk.talkHistory"

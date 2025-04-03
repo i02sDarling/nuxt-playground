@@ -10,6 +10,7 @@ function handleClose(done: () => void) {
   ElMessageBox.confirm('确认关闭吗？(您的输入将不会被保存)')
     .then(() => {
       commands.setDialogVisible(false)
+      talk.resetHistory()
       done()
     })
     .catch(() => {
@@ -18,9 +19,10 @@ function handleClose(done: () => void) {
 }
 
 async function sendMsg() {
+  if(inputText.value.trim() === '')
+    return
   talk.addTalkItem(inputText.value)
   inputText.value = ''
-  await nextTick()
   // 注意这里需要延迟20ms正好可以获取到更新后的dom节点
 }
 onMounted(() => {
@@ -37,10 +39,19 @@ addCommands(
     icon: 'i-material-icon-theme-adobe-illustrator',
   },
 )
+useEventListener('keydown', (e) => {
+  switch (e.key) {
+    case 'Enter': {
+      sendMsg()
+      e.preventDefault()
+      break
+    }
+  }
+})
 </script>
 
 <template>
-  <ElDialog v-model="commands.dialogVisible" title="DeepSeek-V1" width="500" z-100 :before-close="handleClose">
+  <ElDialog v-model="commands.dialogVisible" title="DeepSeek-V3" width="500" z-100 :before-close="handleClose">
     <div ref="scrollRef" h-40vh w-full overflow-y-auto>
       <TalkItem />
     </div>
