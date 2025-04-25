@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { requestAI } from '../composables/request'
-
 const ui = useUiState()
 const play = usePlaygroundStore()
 const guide = useGuideStore()
@@ -9,7 +7,6 @@ const commands = useCommandsStore()
 
 const buildTime = new Date(runtime.public.buildTime)
 const timeAgo = useTimeAgo(buildTime)
-console.log(await requestAI('hello'))
 
 function downloadCurrentGuide() {
   if (!play.webcontainer)
@@ -45,7 +42,6 @@ addCommands(
     icon: 'i-ph-terminal-window-duotone',
   },
 )
-
 </script>
 
 <template>
@@ -134,5 +130,4 @@ addCommands(
       </NuxtLink>
     </div>
   </nav>
-
 </template>

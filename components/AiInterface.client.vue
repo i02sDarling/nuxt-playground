@@ -7,10 +7,9 @@ const inputText = ref('')
 const scrollRef = ref<HTMLElement | null>(null)
 
 function handleClose(done: () => void) {
-  ElMessageBox.confirm('确认关闭吗？(您的输入将不会被保存)')
+  ElMessageBox.confirm('确认关闭吗小助手吗？(您的输入将不会被保存)')
     .then(() => {
       commands.setDialogVisible(false)
-      talk.resetHistory()
       done()
     })
     .catch(() => {
@@ -19,18 +18,10 @@ function handleClose(done: () => void) {
 }
 
 async function sendMsg() {
-  if(inputText.value.trim() === '')
-    return
+  if (inputText.value.trim() === '')return
   talk.addTalkItem(inputText.value)
   inputText.value = ''
-  // 注意这里需要延迟20ms正好可以获取到更新后的dom节点
 }
-onMounted(() => {
-  setInterval(() => {
-  // @ts-ignore
-    scrollRef.value.scrollTop = scrollRef?.value?.scrollHeight
-  }, 3000)
-})
 addCommands(
   {
     id: 'ask_ai',
@@ -48,6 +39,14 @@ useEventListener('keydown', (e) => {
     }
   }
 })
+watch(() => talk.talkHistory, () => {
+  nextTick(() => {
+    scrollRef.value?.scrollTo({
+      top: scrollRef.value.scrollHeight,
+      behavior: 'smooth',
+    })
+  })
+}, { deep: true })
 </script>
 
 <template>
@@ -63,7 +62,6 @@ useEventListener('keydown', (e) => {
           type="textarea"
           placeholder="输入您的内容"
         />
-
         <el-button type="primary" @click="sendMsg">
           发送
         </el-button>
